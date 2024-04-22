@@ -1,28 +1,20 @@
 {
   "user": [
     {
-      "no": 1,
-      "id": "1",
-      "name": "khyati",
-      "email": "khyati@gmail.com"
+      "id": "2w"
     },
     {
-      "no": 2,
-      "id": "2",
-      "name": "harshil",
-      "email": "harshil@gmail.com"
-    },
-    {
-      "no": 3,
-      "id": "3",
-      "name": "harshil",
-      "email": "harshil@gmail.com"
+      "id": "2wa"
     }
   ],
   "table": [
     {
-      "id": "e0e6",
-      "row": "aa"
+      "id": "a52f",
+      "row": "dob"
+    },
+    {
+      "id": "9fdf",
+      "row": "address"
     }
   ]
 }

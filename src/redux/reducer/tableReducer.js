@@ -11,8 +11,6 @@ const tableReducer = (state = initinalState, action) => {
         case ADD_ROW: {
 
             let newRow = [...state.table, action.payload]
-            console.log(newRow, "newrow from reducer");
-            console.log(state.table, "tr redu");
             return {
                 ...state,
                 table: newRow

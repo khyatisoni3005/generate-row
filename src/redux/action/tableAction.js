@@ -5,7 +5,6 @@ export const addRow = (rows) => {
     return (dispatch) => {
         axios.post("http://localhost:3001/table", rows)
             .then((res) => {
-                console.log(res, "res from action");
                 dispatch({
                     type: ADD_ROW,
                     payload: res.data
@@ -18,7 +17,6 @@ export const getTableRow = () => {
     return (dispatch) => {
         axios.get("http://localhost:3001/table")
             .then((res) => {
-                console.log(res, "res from action");
                 dispatch({
                     type: GET_ROW,
                     payload: res.data
@@ -27,7 +25,7 @@ export const getTableRow = () => {
     }
 }
 export const deleteRows = (id) => {
-    console.log("delete", id);
+
     return (dispatch) => {
         axios.delete(`http://localhost:3001/table/${id}`)
             .then((res) => {
