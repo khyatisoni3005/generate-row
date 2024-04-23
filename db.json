@@ -1,19 +1,24 @@
 {
   "user": [
     {
-      "id": "2w"
+      "name": "khyati",
+      "email": "khyati.com",
+      "id": "ddb",
+      "Date": "po",
+      "address": "yp",
+      "age": "pu"
     },
     {
-      "id": "2wa"
+      "name": "khyati",
+      "email": "khyati.com",
+      "id": "ddbw",
+      "address": "wew",
+      "age": "wew"
     }
   ],
   "table": [
     {
-      "id": "a52f",
-      "row": "dob"
-    },
-    {
-      "id": "9fdf",
+      "id": "c751",
       "row": "address"
     }
   ]

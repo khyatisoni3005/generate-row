@@ -94,36 +94,25 @@ function TableData() {
     }
 
     // function submitUserData(id) {
-    //     console.log(userData, "userdara");
     //     let updateData = userData.find((data) => data.id == id)
     //     const objectUpdate = {
     //         updateData,
     //         rowData,
     //         id
     //     }
-    //     console.log(" submitUserData objectUpdate ", objectUpdate);
     //     setEditModleOpen(false);
     //     dispatch(submitNewData(objectUpdate))
     // }
     function submitUserData(id) {
-        // Assume rowData contains the edited fields like { dob: 'newDOB', address: 'newAddress' }
-        let existingData = userData.find((data) => data.id === id);
-
-        // Merge the edited rowData into existingData.rowdata
-        const updatedRowData = {
-            ...existingData,
-            rowdata: {
-                ...existingData.rowdata,
-                ...rowData
-            }
-        };
-
+        let updatedData = userData.find((val) => val.id == id)
+        // console.log(updatedData, "updatedData");
         const objectUpdate = {
-            ...updatedRowData,
-            id
+            ...updatedData,
+            id,
+            ...rowData,
+
         };
 
-        console.log("submitUserData objectUpdate", objectUpdate);
         setEditModleOpen(false);
         dispatch(submitNewData(objectUpdate));
     }
@@ -153,135 +142,142 @@ function TableData() {
         }
     }, [editModleOpen])
     return (
-        <>
-            <TableContainer>
-                <div className="col-8 mt-5">
-                    <Table >
-                        <TableHead style={{ textTransform: "capitalize" }}>
-                            <TableRow>
-                                <TableCell><b>Number</b></TableCell>
-                                <TableCell ><b>Name</b></TableCell>
-                                <TableCell><b>Email</b></TableCell>
-                                {
-                                    table.map((val, ind) => {
-                                        return (
-                                            <React.Fragment key={ind}>
-                                                <TableCell><b>{val.row}
-                                                    <CloseIcon style={{ fontSize: "20px", color: "red", marginLeft: "5px" }} variant="outlined" onClick={() => deleteRow(val.id)} />
-                                                    <Dialog
-                                                        open={open}
-                                                        onClose={handleClose}
-                                                        BackdropProps={{ style: { backgroundColor: 'transparent' } }}
-                                                        disableBackdropClick
-                                                        aria-labelledby="draggable-dialog-title"
-                                                    >
-                                                        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                                                            Confirm
-                                                        </DialogTitle>
-                                                        <DialogContent>
-                                                            <DialogContentText>
-                                                                Are You Sure That You Want  To Delete The ROW? if yes , click Delete!
-                                                            </DialogContentText>
-                                                        </DialogContent>
-                                                        <DialogActions>
-                                                            <Button onClick={handleClose}>
-                                                                Cancel
-                                                            </Button>
-                                                            <Button onClick={() => confirmDelete(val.id)}>Delete</Button>
-                                                        </DialogActions>
-                                                    </Dialog>
-                                                </b>
-                                                </TableCell>
-                                            </React.Fragment>
-                                        )
-                                    })
-                                }
-                                <TableCell style={{ textAlign: "center" }}><b style={{ marginLeft: "-90px" }}>Action</b></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody >
-                            {userData.map((user, ind) => (
-                                <TableRow key={ind}>
-                                    <TableCell component="th" scope="row">
-                                        {ind + 1}
-                                    </TableCell>
-                                    <TableCell> {user.name}</TableCell>
-                                    <TableCell >{user.email}</TableCell>
+        < div>
+            <div className="row">
+
+
+                <TableContainer>
+                    <div className="col-8 mt-5">
+                        <Table >
+                            <TableHead style={{ textTransform: "capitalize" }}>
+                                <TableRow>
+                                    <TableCell><b>Number</b></TableCell>
+                                    <TableCell ><b>Name</b></TableCell>
+                                    <TableCell><b>Email</b></TableCell>
                                     {
                                         table.map((val, ind) => {
-                                            console.log(val, "vallllll");
                                             return (
                                                 <React.Fragment key={ind}>
-                                                    <TableCell key={val.id}>
-                                                        {user.rowdata && user.rowdata[val.row] ? user.rowdata[val.row] : ''}
+                                                    <TableCell><b>{val.row}
+                                                        <CloseIcon style={{ fontSize: "20px", color: "red", marginLeft: "5px" }} variant="outlined" onClick={() => deleteRow(val.id)} />
+                                                        <Dialog
+                                                            open={open}
+                                                            onClose={handleClose}
+                                                            BackdropProps={{ style: { backgroundColor: 'transparent' } }}
+                                                            disableBackdropClick
+                                                            aria-labelledby="draggable-dialog-title"
+                                                        >
+                                                            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                                                                Confirm
+                                                            </DialogTitle>
+                                                            <DialogContent>
+                                                                <DialogContentText>
+                                                                    Are You Sure That You Want  To Delete The ROW? if yes , click Delete!
+                                                                </DialogContentText>
+                                                            </DialogContent>
+                                                            <DialogActions>
+                                                                <Button onClick={handleClose}>
+                                                                    Cancel
+                                                                </Button>
+                                                                <Button onClick={() => confirmDelete(val.id)}>Delete</Button>
+                                                            </DialogActions>
+                                                        </Dialog>
+                                                    </b>
                                                     </TableCell>
                                                 </React.Fragment>
                                             )
                                         })
                                     }
-                                    <TableCell >
-                                        <div className="row" style={{ textAlign: "center" }}>
-                                            <div className="col-5">
-                                                <CommonButton content={"deleteData"} onClick={() => deleteUser(user.id)} />
-                                            </div>
-                                            <div className="col-5 ">
-                                                <CommonButton content={"editData"} onClick={() => viewUserData(user.id)} />
-                                            </div>
-                                        </div>
-                                    </TableCell>
+                                    <TableCell style={{ textAlign: "center" }}><b>Action</b></TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-            </TableContainer>
-            {/* modle */}
+                            </TableHead>
+                            <TableBody >
+                                {userData.map((user, ind) => (
+                                    <TableRow key={ind}>
+                                        <TableCell component="th" scope="row">
+                                            {ind + 1}
+                                        </TableCell>
+                                        <TableCell> {user.name}</TableCell>
+                                        <TableCell >{user.email}</TableCell>
+                                        {
+                                            table.map((val, ind) => {
+                                                console.log("user", user)
+                                                console.log("val", val)
+                                                return (
+                                                    <React.Fragment key={ind}>
+                                                        <TableCell key={val.id}>
+                                                            {/* {user.rowdata.dob} */}
+                                                            {user[val.row]}
+                                                        </TableCell>
 
-            <div>
-                <Modal
-                    open={editModleOpen}
-                    onClose={editModlehandleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style} >
-                        <h5>USER DATA</h5>
-                        <label htmlFor="">name</label><br />
-                        <input type="text" placeholder='name' name='name' disabled
-                            id="filled-disabled"
-                            label="Disabled" value={viewData.name} /><br /><br />
-                        <label htmlFor="">email</label><br />
-                        <input type="text" placeholder='email' disabled
-                            id="filled-disabled"
-                            label="Disabled" name='email' value={viewData.email} /><br />
-                        {
-                            table.map((val, ind) => {
-                                return (
-                                    < React.Fragment key={ind}>
-                                        <br />
-                                        <label htmlFor="">{val.row}</label><br />
-                                        <input type="text" placeholder={val.row} name={val.row} onChange={handleRowData} />
-                                        <br />
-                                    </React.Fragment>
-                                )
-                            })
-                        }
-                        <div className="row mt-3">
-                            <div className="col-4">
-                                <CommonButton content={"submit"} onClick={() => submitUserData(viewData.id)} />
+                                                    </React.Fragment>
+                                                )
+                                            })
+                                        }
+                                        <TableCell >
+                                            <div className="row ms-5" style={{ textAlign: "center" }}>
+                                                <div className="col-5">
+                                                    <CommonButton content={"delete"} onClick={() => deleteUser(user.id)} />
+                                                </div>
+                                                <div className="col-5 ">
+                                                    <CommonButton content={"edit"} onClick={() => viewUserData(user.id)} />
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </TableContainer>
+                {/* modle */}
+
+                <div>
+                    <Modal
+                        open={editModleOpen}
+                        onClose={editModlehandleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style} >
+                            <h5>USER DATA</h5>
+                            <label htmlFor="">name</label><br />
+                            <input type="text" placeholder='name' name='name' disabled
+                                id="filled-disabled"
+                                label="Disabled" value={viewData.name} /><br /><br />
+                            <label htmlFor="">email</label><br />
+                            <input type="text" placeholder='email' disabled
+                                id="filled-disabled"
+                                label="Disabled" name='email' value={viewData.email} /><br />
+                            {
+                                table.map((val, ind) => {
+                                    return (
+                                        < React.Fragment key={ind}>
+                                            <br />
+                                            <label htmlFor="">{val.row}</label><br />
+                                            <input type="text" placeholder={val.row} name={val.row} onChange={handleRowData} />
+                                            <br />
+                                        </React.Fragment>
+                                    )
+                                })
+                            }
+                            <div className="row mt-3">
+                                <div className="col-4">
+                                    <CommonButton content={"submit"} onClick={() => submitUserData(viewData.id)} />
+                                </div>
+                                <div className="col-4" style={{ marginLeft: "-30px" }}>
+                                    <CommonButton content={"cancle"} onClick={editModlehandleClose} />
+
+                                </div>
                             </div>
-                            <div className="col-4" style={{ marginLeft: "-30px" }}>
-                                <CommonButton content={"cancle"} onClick={editModlehandleClose} />
-
-                            </div>
-                        </div>
 
 
 
-                    </Box>
-                </Modal>
-            </div >
-        </>
+                        </Box>
+                    </Modal>
+                </div >
+            </div>
+        </div >
     );
 }
 

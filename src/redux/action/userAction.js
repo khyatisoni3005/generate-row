@@ -31,22 +31,17 @@ export const emptyId = (id) => {
 }
 
 export const submitNewData = (objectUpdate) => {
-    let rowdata = objectUpdate.rowData
-    let updatedata = objectUpdate.updateData
-    let newobj = {
-        ...updatedata,
-        rowdata
 
-    }
+
     return (dispatch) => {
-        axios.put(`http://localhost:3001/user/${objectUpdate.id}`, newobj)
+        axios.put(`http://localhost:3001/user/${objectUpdate.id}`, objectUpdate)
             .then((res) => {
                 let resData = res.data
-                let userData = objectUpdate.id
+                let userId = objectUpdate.id
+                console.log("submitNewData resData", resData);
                 const updateUser = {
-                    resData, userData
+                    ...resData
                 }
-                console.log(updateUser, "updateUser action ");
                 dispatch({
                     type: POST_SUBMITED_DATA,
                     payload: updateUser

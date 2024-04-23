@@ -27,6 +27,7 @@ const userReducer = (state = initinalState, action) => {
             }
         }
         case POST_SUBMITED_DATA: {
+            console.log(' action.payload', action.payload);
             return {
                 ...state,
                 userData: state.userData.map((val) => {

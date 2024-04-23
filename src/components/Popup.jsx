@@ -33,6 +33,9 @@ export default function Popup() {
     function submit() {
         dispatch(addRow(inputValue))
         setOpen(false)
+        setInputValue({
+            row: ""
+        })
     }
 
     function handleInput(e) {
